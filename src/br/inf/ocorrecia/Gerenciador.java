@@ -1,20 +1,28 @@
 package br.inf.ocorrecia;
 
+import java.util.LinkedList;
+import java.util.List;
+
+
 public class Gerenciador {
 
-	int quantFuncionario;
+	List<Funcionario> funcionarios;
 	
 	public Gerenciador() {
-		quantFuncionario = 0;
-	}
-	
-	public int quantFuncionarios() {
-		return quantFuncionario;
+		funcionarios = new LinkedList<Funcionario>();
 	}
 
-	public boolean cadastraFuncionario() {
-		quantFuncionario++;
-		return true;
+	public List<Funcionario> obterFuncionarios() {
+		return funcionarios;
+	}
+
+	public void cadastrarFuncionario(Funcionario func) throws UsuarioJaCadastradoException {
+		for (Funcionario f : funcionarios) {
+			if (func.equals(f)) {
+				throw new UsuarioJaCadastradoException();
+			}
+		}
+		funcionarios.add(func);
 	}
 
 }
